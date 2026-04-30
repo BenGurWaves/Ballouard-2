@@ -1,0 +1,367 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BALLOUARD ATELIER — AWWWARDS-LEVEL DESIGN SYSTEM */
+/* Abstract Luxury • Editorial Typography • Purposeful Motion */
+
+@font-face {
+  font-family: 'Söhne';
+  src: local('Inter'), local('-apple-system');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Söhne';
+  src: local('Inter SemiBold'), local('-apple-system');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Söhne Mono';
+  src: local('SF Mono'), local('Monaco'), local('Consolas');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Color — Atmospheric, Muted */
+  --paper: #FAFAFA;
+  --paper-warm: #F5F5F0;
+  --ink: #0A0A0A;
+  --ink-soft: #1A1A1A;
+  --pencil: #666666;
+  --whisper: #E8E8E8;
+  --accent: #C4B5A0;
+  
+  /* Typography */
+  --font-sans: 'Söhne', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Söhne Mono', 'SF Mono', monospace;
+  
+  /* Atelier Scale — Dramatic Breathing Room */
+  --gutter: 12vw;
+  --gutter-mobile: 6vw;
+  --breath: 35vh;
+  --intimate: 6rem;
+}
+
+/* Hide default cursor on desktop */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Show default cursor on mobile/touch */
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-whisper/50;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+  
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-family: var(--font-sans);
+    font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  ::selection {
+    @apply bg-ink text-paper;
+  }
+}
+
+@layer components {
+  /* Grain — Hand-engraved Texture */
+  .grain {
+    position: fixed;
+    inset: -50%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    animation: grain 6s steps(8) infinite;
+  }
+  
+  /* Typography — Editorial Scale */
+  .display-hero {
+    font-family: var(--font-sans);
+    font-size: clamp(4rem, 15vw, 15rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  
+  .display-section {
+    font-family: var(--font-sans);
+    font-size: clamp(2.5rem, 8vw, 8rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+  
+  .display-subsection {
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 4vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  
+  .editorial-large {
+    font-family: var(--font-sans);
+    font-size: clamp(1.25rem, 2vw, 2rem);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+  
+  .editorial-small {
+    font-family: var(--font-sans);
+    font-size: clamp(0.875rem, 1.2vw, 1.125rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--pencil);
+  }
+  
+  .technical {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  
+  /* Layout — Asymmetric, Editorial */
+  .section-full {
+    @apply relative min-h-screen w-full;
+    padding-left: max(var(--gutter), 4rem);
+    padding-right: var(--gutter);
+    padding-top: 25vh;
+    padding-bottom: 25vh;
+  }
+  
+  .section-padded {
+    @apply relative w-full;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+  }
+  
+  /* The Upside Down — Core Mechanic */
+  .upside-down {
+    transform: rotate(180deg);
+    display: inline-block;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .upside-down-hover:hover {
+    transform: rotate(0deg);
+  }
+  
+  /* Inverted Section — Maximum Contrast */
+  .inverted {
+    @apply bg-ink text-paper;
+  }
+  
+  .inverted-soft {
+    background-color: var(--ink-soft);
+    color: var(--paper);
+  }
+  
+  /* Motion — Purposeful, Physical */
+  .velocity-text {
+    will-change: transform;
+  }
+  
+  .reveal-mask {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .reveal-mask.visible {
+    clip-path: inset(0 0 0% 0);
+  }
+  
+  .char-split .char {
+    display: inline-block;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  }
+  
+  .char-split.visible .char {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  /* Line — Architectural Element */
+  .line-architecture {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--whisper), transparent);
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .line-architecture.visible {
+    transform: scaleX(1);
+  }
+  
+  /* Hover — Magnetic Feel */
+  .magnetic-hover {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .magnetic-hover:hover {
+    transform: translateX(8px);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+/* Animations */
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -4%); }
+  20% { transform: translate(-6%, 2%); }
+  30% { transform: translate(3%, -10%); }
+  40% { transform: translate(-2%, 10%); }
+  50% { transform: translate(-6%, 4%); }
+  60% { transform: translate(6%, 0%); }
+  70% { transform: translate(0%, 6%); }
+  80% { transform: translate(1%, 14%); }
+  90% { transform: translate(-4%, 4%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(180deg); }
+  50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  :root {
+    --gutter: var(--gutter-mobile);
+  }
+  
+  .display-hero {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+    letter-spacing: -0.02em;
+  }
+  
+  .display-section {
+    font-size: clamp(1.75rem, 8vw, 3rem);
+    letter-spacing: -0.02em;
+  }
+  
+  .display-subsection {
+    font-size: clamp(1.25rem, 5vw, 2rem);
+  }
+  
+  .section-full {
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+  }
+  
+  .section-padded {
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+  }
+  
+  .technical {
+    font-size: 0.5625rem;
+    letter-spacing: 0.15em;
+  }
+  
+  /* Stack grid columns on mobile */
+  .grid-cols-12 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Adjust timeline spacing */
+  .timeline-item {
+    padding-left: 2rem;
+  }
+  
+  /* Reduce parallax effects on mobile */
+  .velocity-text {
+    will-change: auto;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --gutter: 8vw;
+  }
+  
+  .display-hero {
+    font-size: clamp(3rem, 12vw, 8rem);
+  }
+}

@@ -1,0 +1,87 @@
+1:"$Sreact.fragment"
+3:I[4783,["177","static/chunks/app/layout-8165afe088aa508f.js"],"default"]
+4:I[5244,[],""]
+5:I[3866,[],""]
+6:I[7033,[],"ClientPageRoot"]
+7:I[3952,["592","static/chunks/c15bf2b0-fa7b0a3d79221ad8.js","192","static/chunks/192-63f77f105445ccf7.js","974","static/chunks/app/page-77c64a6d6884ad33.js"],"default"]
+a:I[6213,[],"OutletBoundary"]
+c:I[6213,[],"MetadataBoundary"]
+e:I[6213,[],"ViewportBoundary"]
+10:I[4835,[],""]
+:HL["/_next/static/css/74f425227908cc7a.css","style"]
+2:Tad9,{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://ballouard-atelier.com/#person",
+      "name": "Ludovic Ballouard",
+      "jobTitle": "Independent Watchmaker",
+      "description": "Independent watchmaker creating hand-crafted timepieces in the Geneva countryside since 2009.",
+      "birthPlace": {
+        "@type": "Place",
+        "name": "Brittany, France"
+      },
+      "knowsAbout": ["Haute Horlogerie", "Watch Complications", "Hand Engraving"],
+      "alumniOf": [
+        { "@type": "Organization", "name": "F.P. Journe" },
+        { "@type": "Organization", "name": "Franck Muller" }
+      ],
+      "url": "https://ballouard-atelier.com"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://ballouard-atelier.com/#organization",
+      "name": "Ballouard Atelier",
+      "description": "Independent watchmaking atelier in the Geneva countryside, creating hand-crafted timepieces with unique complications.",
+      "url": "https://ballouard-atelier.com",
+      "founder": { "@id": "https://ballouard-atelier.com/#person" },
+      "location": {
+        "@type": "Place",
+        "name": "Geneva Countryside, Switzerland"
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://ballouard-atelier.com/#upsidedown",
+      "name": "UPSIDE DOWN",
+      "description": "Timepiece where all hour numerals are upside down except the current hour. Past and future literally inverted.",
+      "brand": { "@id": "https://ballouard-atelier.com/#organization" },
+      "material": "Hand-engraved case, in-house calibre B01",
+      "productionDate": "2009"
+    },
+    {
+      "@type": "Product",
+      "@id": "https://ballouard-atelier.com/#halftime",
+      "name": "HALF TIME",
+      "description": "Timepiece where hour numerals are split in half across two discs. Only the current hour is complete.",
+      "brand": { "@id": "https://ballouard-atelier.com/#organization" },
+      "material": "Hand-engraved case, patented complication",
+      "productionDate": "2013"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ballouard-atelier.com/#website",
+      "url": "https://ballouard-atelier.com",
+      "name": "Ballouard Atelier",
+      "publisher": { "@id": "https://ballouard-atelier.com/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://ballouard-atelier.com/#webpage",
+      "url": "https://ballouard-atelier.com",
+      "name": "Ludovic Ballouard — Atelier Geneva",
+      "isPartOf": { "@id": "https://ballouard-atelier.com/#website" },
+      "about": { "@id": "https://ballouard-atelier.com/#person" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "contentUrl": "https://ballouard-atelier.com/og-image.jpg"
+      }
+    }
+  ]
+}0:{"P":null,"b":"0Jxfl802eHYtRPXYbOUVe","p":"","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/74f425227908cc7a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":[["$","head",null,{"children":["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"$2"},"suppressHydrationWarning":true}]}],["$","body",null,{"suppressHydrationWarning":true,"children":[["$","$L3",null,{}],["$","div",null,{"className":"grain","aria-hidden":"true"}],["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","$L6",null,{"Component":"$7","searchParams":{},"params":{},"promises":["$@8","$@9"]}],null,["$","$La",null,{"children":"$Lb"}]]}],{},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","f4C_JsCESKYLRW2HKs5w0",{"children":[["$","$Lc",null,{"children":"$Ld"}],["$","$Le",null,{"children":"$Lf"}],null]}]]}],false]],"m":"$undefined","G":["$10","$undefined"],"s":false,"S":true}
+8:{}
+9:{}
+f:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+d:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"Ludovic Ballouard — Atelier Geneva | Independent Watchmaker"}],["$","meta","2",{"name":"description","content":"Only the present moment has a meaning. Ludovic Ballouard creates hand-crafted timepieces in the Geneva countryside. The UPSIDE DOWN and HALF TIME collections reinterpret how we perceive time."}],["$","meta","3",{"name":"author","content":"Ludovic Ballouard"}],["$","meta","4",{"name":"keywords","content":"Ludovic Ballouard,independent watchmaker,Geneva,haute horlogerie,Upside Down watch,Half Time watch,hand-crafted timepieces"}],["$","meta","5",{"name":"creator","content":"Velocity Agency"}],["$","meta","6",{"name":"publisher","content":"Velocity Agency"}],["$","meta","7",{"name":"robots","content":"index, follow"}],["$","meta","8",{"name":"googlebot","content":"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}],["$","link","9",{"rel":"canonical","href":"https://ballouard-atelier.com"}],["$","meta","10",{"property":"og:title","content":"Ludovic Ballouard — Atelier Geneva"}],["$","meta","11",{"property":"og:description","content":"Only the present moment has a meaning. Hand-crafted timepieces in the Geneva countryside."}],["$","meta","12",{"property":"og:url","content":"https://ballouard-atelier.com"}],["$","meta","13",{"property":"og:site_name","content":"Ballouard Atelier"}],["$","meta","14",{"property":"og:locale","content":"en_US"}],["$","meta","15",{"property":"og:type","content":"website"}],["$","meta","16",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","17",{"name":"twitter:title","content":"Ludovic Ballouard — Atelier Geneva"}],["$","meta","18",{"name":"twitter:description","content":"Only the present moment has a meaning. Hand-crafted timepieces in the Geneva countryside."}]]
+b:null
