@@ -8,7 +8,7 @@ const JSON_LD_SCHEMA = `{
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://ballouard-atelier.com/#person",
+      "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#person",
       "name": "Ludovic Ballouard",
       "jobTitle": "Independent Watchmaker",
       "description": "Independent watchmaker creating hand-crafted timepieces in the Geneva countryside since 2009.",
@@ -21,15 +21,15 @@ const JSON_LD_SCHEMA = `{
         { "@type": "Organization", "name": "F.P. Journe" },
         { "@type": "Organization", "name": "Franck Muller" }
       ],
-      "url": "https://ballouard-atelier.com"
+      "url": "https://velocity.calyvent.com/previews/ludovic-ballouard"
     },
     {
       "@type": "Organization",
-      "@id": "https://ballouard-atelier.com/#organization",
+      "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#organization",
       "name": "Ballouard Atelier",
       "description": "Independent watchmaking atelier in the Geneva countryside, creating hand-crafted timepieces with unique complications.",
-      "url": "https://ballouard-atelier.com",
-      "founder": { "@id": "https://ballouard-atelier.com/#person" },
+      "url": "https://velocity.calyvent.com/previews/ludovic-ballouard",
+      "founder": { "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#person" },
       "location": {
         "@type": "Place",
         "name": "Geneva Countryside, Switzerland"
@@ -37,39 +37,39 @@ const JSON_LD_SCHEMA = `{
     },
     {
       "@type": "Product",
-      "@id": "https://ballouard-atelier.com/#upsidedown",
+      "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#upsidedown",
       "name": "UPSIDE DOWN",
       "description": "Timepiece where all hour numerals are upside down except the current hour. Past and future literally inverted.",
-      "brand": { "@id": "https://ballouard-atelier.com/#organization" },
+      "brand": { "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#organization" },
       "material": "Hand-engraved case, in-house calibre B01",
       "productionDate": "2009"
     },
     {
       "@type": "Product",
-      "@id": "https://ballouard-atelier.com/#halftime",
+      "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#halftime",
       "name": "HALF TIME",
       "description": "Timepiece where hour numerals are split in half across two discs. Only the current hour is complete.",
-      "brand": { "@id": "https://ballouard-atelier.com/#organization" },
+      "brand": { "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#organization" },
       "material": "Hand-engraved case, patented complication",
       "productionDate": "2013"
     },
     {
       "@type": "WebSite",
-      "@id": "https://ballouard-atelier.com/#website",
-      "url": "https://ballouard-atelier.com",
-      "name": "Ballouard Atelier",
-      "publisher": { "@id": "https://ballouard-atelier.com/#organization" }
+      "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#website",
+      "url": "https://velocity.calyvent.com/previews/ludovic-ballouard",
+      "name": "Velocity — Ludovic Ballouard",
+      "publisher": { "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#organization" }
     },
     {
       "@type": "WebPage",
-      "@id": "https://ballouard-atelier.com/#webpage",
-      "url": "https://ballouard-atelier.com",
+      "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#webpage",
+      "url": "https://velocity.calyvent.com/previews/ludovic-ballouard",
       "name": "Ludovic Ballouard — Atelier Geneva",
-      "isPartOf": { "@id": "https://ballouard-atelier.com/#website" },
-      "about": { "@id": "https://ballouard-atelier.com/#person" },
+      "isPartOf": { "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#website" },
+      "about": { "@id": "https://velocity.calyvent.com/previews/ludovic-ballouard/#person" },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "contentUrl": "https://ballouard-atelier.com/og-image.jpg"
+        "contentUrl": "https://velocity.calyvent.com/previews/ludovic-ballouard/og-image.jpg"
       }
     }
   ]
@@ -96,8 +96,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ludovic Ballouard — Atelier Geneva",
     description: "Only the present moment has a meaning. Hand-crafted timepieces in the Geneva countryside.",
-    url: "https://ballouard-atelier.com",
-    siteName: "Ballouard Atelier",
+    url: "https://velocity.calyvent.com/previews/ludovic-ballouard",
+    siteName: "Velocity — Ludovic Ballouard",
     locale: "en_US",
     type: "website",
   },
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     description: "Only the present moment has a meaning. Hand-crafted timepieces in the Geneva countryside.",
   },
   alternates: {
-    canonical: "https://ballouard-atelier.com",
+    canonical: "https://velocity.calyvent.com/previews/ludovic-ballouard",
   },
   verification: {
     google: "",
