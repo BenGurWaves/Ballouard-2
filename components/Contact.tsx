@@ -154,15 +154,20 @@ export default function Contact() {
               Website by Velocity Agency
             </p>
             <p className="font-mono text-xs text-pencil/40 mt-2">
-              ©Velocity2026
+              &copy;Velocity2026
             </p>
           </div>
-          <div className="text-right">
-            <p className="technical text-pencil/60">
-              Only the present moment
+          <div className="mt-12 text-center">
+            <p className="technical text-pencil">
+              &copy;Velocity Agency
             </p>
-            <p className="technical text-pencil/40 mt-1">
-              has a meaning
+            <p className="technical text-pencil mt-2">
+              Only the present moment has meaning
+            </p>
+            <p className="technical text-pencil mt-2">
+              <a href="https://velocity.calyvent.com" className="text-pencil hover:text-ink transition-colors">
+                velocity.calyvent.com
+              </a>
             </p>
           </div>
         </footer>
