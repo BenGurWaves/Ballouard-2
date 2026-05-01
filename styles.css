@@ -330,45 +330,84 @@ body {
         font-size: 6rem;
     }
 }
-    font-family: var(--font-clean);
-    font-size: 0.6rem;
-    font-weight: 300;
-    color: var(--silver);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .content-section {
+        padding: 1.5rem 1rem;
+    }
+    
+    .hero-title {
+        font-size: clamp(2.5rem, 14vw, 4rem);
+    }
+    
+    .section-title {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+    }
+    
+    .section-text {
+        font-size: 0.9rem;
+    }
+    
+    .section-number {
+        font-size: 4rem;
+        opacity: 0.08;
+    }
+    
+    .numerator, .denominator {
+        font-size: clamp(2.5rem, 10vw, 3.5rem);
+    }
+    
+    .fraction-line {
+        width: 40px;
+    }
+    
+    .contact-link {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+    }
 }
 
-/* Main Dial Container */
-.dial-container {
-    position: relative;
-    width: 100vmin;
-    height: 100vmin;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Large Desktop */
+@media (min-width: 1400px) {
+    .content-section {
+        padding: 6rem;
+    }
+    
+    .section-content {
+        max-width: 800px;
+    }
+    
+    .section-text {
+        font-size: 1.35rem;
+        max-width: 55ch;
+    }
 }
 
-/* Dial Track (the ring) */
-.dial-track {
-    position: absolute;
-    width: calc(var(--dial-radius) * 2);
-    height: calc(var(--dial-radius) * 2);
-    pointer-events: none;
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .guilloche-hint {
+        opacity: 0.8;
+    }
+    
+    .contact-link::after {
+        display: none;
+    }
 }
 
-.track-svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .progress-bar {
+        transition: none;
+    }
 }
 
-.track-circle {
-    stroke: var(--track);
-    opacity: 0.5;
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --primary: #5c5349;
+        --tertiary: #4a3520;
+    }
 }
-
-.track-ticks {
-    stroke: var(--track);
     opacity: 0.3;
 }
 
