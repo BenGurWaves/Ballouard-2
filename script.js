@@ -61,6 +61,33 @@
     applyTemporalFocus();
     window.addEventListener('resize', applyTemporalFocus);
 
+    // ===== TEXT SPLITTING FOR WORD-BY-WORD ANIMATION =====
+    function splitTextIntoWords() {
+        const headlines = document.querySelectorAll('.mega-headline');
+        headlines.forEach(headline => {
+            const text = headline.textContent;
+            const words = text.split(' ');
+            headline.innerHTML = words.map(word => 
+                `<span class="word" style="display: inline-block; overflow: hidden;"><span class="word-inner" style="display: inline-block; transform: translateY(100%); opacity: 0;">${word}</span></span>`
+            ).join(' ');
+            
+            // Animate words in
+            setTimeout(() => {
+                const wordInners = headline.querySelectorAll('.word-inner');
+                wordInners.forEach((inner, i) => {
+                    setTimeout(() => {
+                        inner.style.transition = 'transform 1.2s cubic-bezier(0.23, 1, 0.32, 1), opacity 1.2s ease';
+                        inner.style.transform = 'translateY(0)';
+                        inner.style.opacity = '1';
+                    }, i * 100);
+                });
+            }, 500);
+        });
+    }
+    
+    // Split text after loader
+    setTimeout(splitTextIntoWords, 1000);
+
     // ===== LENIS SMOOTH SCROLL - Elegant & Timeless =====
     const lenis = new Lenis({
         duration: 1.2,        // Smooth duration (higher = slower)
@@ -79,9 +106,44 @@
     }
     requestAnimationFrame(raf);
 
-    // Sync Lenis scroll with temporal focus
-    lenis.on('scroll', ({ scroll }) => {
+    // Sync Lenis scroll with temporal focus and kinetic effects
+    lenis.on('scroll', ({ scroll, velocity }) => {
         applyTemporalFocus();
+        
+        // ===== KINETIC PARALLAX DEPTH =====
+        const scrolled = scroll;
+        const viewportHeight = window.innerHeight;
+        
+        // Apply parallax to mega headline
+        const megaHeadline = document.querySelector('.mega-headline');
+        if (megaHeadline) {
+            const rect = megaHeadline.getBoundingClientRect();
+            const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+            const offset = scrolled * 0.3; // Slower than scroll
+            megaHeadline.style.transform = `translateY(${offset * 0.5}px)`;
+        }
+        
+        // Apply parallax to floating elements (opposite direction)
+        const floatingElements = document.querySelectorAll('.floating-headline, .abstract-time');
+        floatingElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+                const offset = scrolled * -0.15; // Faster than scroll
+                el.style.transform = `translateY(${offset}px)`;
+            }
+        });
+        
+        // Massive text kinetic movement based on scroll velocity
+        const massiveTexts = document.querySelectorAll('.massive-text');
+        massiveTexts.forEach(text => {
+            const rect = text.getBoundingClientRect();
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+                // Subtle rotation based on scroll position
+                const centerOffset = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
+                const rotation = centerOffset * 5; // Max 5 degrees
+                text.style.transform = `rotate(${180 + rotation}deg)`;
+            }
+        });
         
         // ===== SCROLL STOP AT EMAIL CENTER =====
         const contactLink = document.querySelector('.contact-link');
@@ -91,16 +153,10 @@
             const viewportCenter = window.innerHeight / 2;
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             
-            // If email is at or past center, stop scrolling
             if (emailCenter <= viewportCenter && scroll < maxScroll) {
-                // Calculate scroll position where email is centered
                 const emailOffset = rect.top + window.scrollY - viewportCenter + rect.height / 2;
-                
-                // Stop Lenis and set to email center position
                 lenis.stop();
                 lenis.scrollTo(emailOffset, { immediate: true });
-                
-                // Prevent further scrolling
                 setTimeout(() => {
                     lenis.destroy();
                 }, 100);

@@ -1,18 +1,29 @@
-/* Ballouard Digital Atelier - Timeless Elegance
- * Swiss International Style meets Quiet Luxury
- * Golden Ratio: 1.618 | Grid-based | Asymmetrical | Editorial
+/* Ballouard Digital Atelier - Abstract Elegance
+ * Swiss International Style × Kinetic Typography × Temporal Focus
+ * Typography as Architecture | Asymmetrical Precision | Uncategorizable Layout
  */
 
 :root {
     --dark: #1a1a1a;
     --neutral: #faf9f7;
-    --accent: #A49D95;      /* Bottom swatch - light warm gray */
-    --primary: #796F66;     /* Top swatch - warm taupe */
-    --secondary: #A79976;   /* Second swatch - sage beige */
-    --tertiary: #654530;    /* Third swatch - deep brown */
-    --warm: #A79976;        /* Same as secondary for highlights */
+    --accent: #A49D95;
+    --primary: #796F66;
+    --secondary: #A79976;
+    --tertiary: #654530;
+    --warm: #A79976;
     --phi: 1.618;
     --section-padding: calc(100vh / var(--phi));
+    
+    /* Typography Scale - Extreme Swiss Style */
+    --text-xs: clamp(0.5rem, 0.8vw, 0.65rem);
+    --text-sm: clamp(0.6rem, 1vw, 0.75rem);
+    --text-base: clamp(0.9rem, 1.2vw, 1rem);
+    --text-lg: clamp(1.1rem, 1.8vw, 1.25rem);
+    --text-xl: clamp(2rem, 4vw, 3rem);
+    --text-2xl: clamp(3rem, 6vw, 5rem);
+    --text-3xl: clamp(5rem, 10vw, 8rem);
+    --text-mega: clamp(8rem, 18vw, 14rem);
+    --text-giga: clamp(12rem, 25vw, 20rem);
 }
 
 * {
@@ -201,12 +212,13 @@ a, button, .contact-link {
 .mega-headline {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
-    font-size: clamp(5rem, 12vw, 10rem);
-    letter-spacing: -0.02em;
-    line-height: 0.95;
+    font-size: var(--text-giga);
+    letter-spacing: -0.04em;
+    line-height: 0.9;
     margin-bottom: calc(2rem / var(--phi));
-    transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
     color: var(--primary);
+    transform-origin: left center;
 }
 
 .mega-headline .word {
@@ -253,21 +265,56 @@ a, button, .contact-link {
     opacity: 0.5;
 }
 
-/* Split Section - Warm taupe sophistication */
+/* Split Section - Asymmetrical breaking layout */
 .split {
     flex-direction: row;
     align-items: stretch;
     padding: 0;
     background: var(--primary);
     color: var(--neutral);
+    overflow: hidden;
+}
+
+.split-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    position: relative;
+}
+
+.split-left::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 1px;
+    height: 60%;
+    background: var(--secondary);
+    opacity: 0.3;
+}
+
+.split-right {
+    flex: 1.618;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 6rem;
+    max-width: 600px;
 }
 
 .split .body-text {
     color: var(--neutral);
+    font-size: var(--text-lg);
 }
 
 .split-right .body-text:first-of-type::first-letter {
     color: var(--secondary);
+    font-size: 4em;
+    float: left;
+    line-height: 0.7;
+    margin-right: 0.1em;
 }
 
 .split-left {
@@ -290,12 +337,14 @@ a, button, .contact-link {
 .massive-text {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
-    font-size: clamp(6rem, 18vw, 14rem);
-    letter-spacing: -0.04em;
-    line-height: 0.9;
-    transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
+    font-size: var(--text-mega);
+    letter-spacing: -0.05em;
+    line-height: 0.85;
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
     color: var(--secondary);
-    opacity: 0.9;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
 }
 
 /* Centered Section - Sage beige warmth, full width */
@@ -654,21 +703,40 @@ a, button, .contact-link {
     color: var(--primary);
 }
 
-/* Temporal Focus - Refined for timeless elegance */
+/* Temporal Focus - The Invention: Blur represents past/future, sharp is present */
 .temporal-text {
-    transition: opacity 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    filter: blur(0px);
 }
 
 .temporal-text.blur-past {
-    opacity: 0.35;
+    opacity: 0.25;
+    filter: blur(2px);
+    transform: scale(0.98);
 }
 
 .temporal-text.blur-future {
-    opacity: 0.35;
+    opacity: 0.25;
+    filter: blur(2px);
+    transform: scale(0.98);
 }
 
 .temporal-text.sharp {
     opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+    letter-spacing: 0;
+}
+
+/* Inverted temporal states */
+.inverted .temporal-text.blur-past,
+.inverted .temporal-text.blur-future {
+    opacity: 0.15;
+}
+
+.inverted .temporal-text.sharp {
+    opacity: 1;
+    text-shadow: 0 0 40px rgba(167, 153, 118, 0.3);
 }
 
 /* Calm reveal - Editorial pacing */
