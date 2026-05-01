@@ -1,6 +1,6 @@
-// Ballouard Digital Atelier - Timeless Elegance
+// Ballouard Digital Atelier - Timeless Elegance by Velocity
 // Swiss International Style: Content informs design
-// Lenis smooth scroll + Elegant custom cursor + Page loader
+// Clean, refined, no broken effects
 
 (function() {
     'use strict';
@@ -18,7 +18,25 @@
         });
     }
 
-    // ===== TEMPORAL FOCUS (defined before Lenis) =====
+    // ===== LENIS SMOOTH SCROLL - Clean & Refined =====
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 0.8,
+        touchMultiplier: 1.5,
+        infinite: false,
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // ===== TEMPORAL FOCUS - Simple opacity only =====
     const moments = document.querySelectorAll('.moment');
     const temporalTexts = document.querySelectorAll('.temporal-text');
 
@@ -27,7 +45,6 @@
         let closestMoment = null;
         let closestDistance = Infinity;
         
-        // Find which moment is closest to center of viewport
         moments.forEach(moment => {
             const rect = moment.getBoundingClientRect();
             const momentCenter = rect.top + rect.height / 2;
@@ -57,95 +74,12 @@
         });
     }
 
-    // Initialize temporal focus
     applyTemporalFocus();
+    lenis.on('scroll', applyTemporalFocus);
     window.addEventListener('resize', applyTemporalFocus);
 
-    // ===== TEXT SPLITTING FOR WORD-BY-WORD ANIMATION =====
-    function splitTextIntoWords() {
-        const headlines = document.querySelectorAll('.mega-headline');
-        headlines.forEach(headline => {
-            const text = headline.textContent;
-            const words = text.split(' ');
-            headline.innerHTML = words.map(word => 
-                `<span class="word" style="display: inline-block; overflow: hidden;"><span class="word-inner" style="display: inline-block; transform: translateY(100%); opacity: 0;">${word}</span></span>`
-            ).join(' ');
-            
-            // Animate words in
-            setTimeout(() => {
-                const wordInners = headline.querySelectorAll('.word-inner');
-                wordInners.forEach((inner, i) => {
-                    setTimeout(() => {
-                        inner.style.transition = 'transform 1.2s cubic-bezier(0.23, 1, 0.32, 1), opacity 1.2s ease';
-                        inner.style.transform = 'translateY(0)';
-                        inner.style.opacity = '1';
-                    }, i * 100);
-                });
-            }, 500);
-        });
-    }
-    
-    // Split text after loader
-    setTimeout(splitTextIntoWords, 1000);
-
-    // ===== LENIS SMOOTH SCROLL - Elegant & Timeless =====
-    const lenis = new Lenis({
-        duration: 1.2,        // Smooth duration (higher = slower)
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Elegant easing
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
-        smoothWheel: true,
-        wheelMultiplier: 0.8, // Slower wheel for weight
-        touchMultiplier: 1.5,
-        infinite: false,
-    });
-
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // Sync Lenis scroll with temporal focus and kinetic effects
-    lenis.on('scroll', ({ scroll, velocity }) => {
-        applyTemporalFocus();
-        
-        // ===== KINETIC PARALLAX DEPTH =====
-        const scrolled = scroll;
-        const viewportHeight = window.innerHeight;
-        
-        // Apply parallax to mega headline
-        const megaHeadline = document.querySelector('.mega-headline');
-        if (megaHeadline) {
-            const rect = megaHeadline.getBoundingClientRect();
-            const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
-            const offset = scrolled * 0.3; // Slower than scroll
-            megaHeadline.style.transform = `translateY(${offset * 0.5}px)`;
-        }
-        
-        // Apply parallax to floating elements (opposite direction)
-        const floatingElements = document.querySelectorAll('.floating-headline, .abstract-time');
-        floatingElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < viewportHeight && rect.bottom > 0) {
-                const offset = scrolled * -0.15; // Faster than scroll
-                el.style.transform = `translateY(${offset}px)`;
-            }
-        });
-        
-        // Massive text kinetic movement based on scroll velocity
-        const massiveTexts = document.querySelectorAll('.massive-text');
-        massiveTexts.forEach(text => {
-            const rect = text.getBoundingClientRect();
-            if (rect.top < viewportHeight && rect.bottom > 0) {
-                // Subtle rotation based on scroll position
-                const centerOffset = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
-                const rotation = centerOffset * 5; // Max 5 degrees
-                text.style.transform = `rotate(${180 + rotation}deg)`;
-            }
-        });
-        
-        // ===== SCROLL STOP AT EMAIL CENTER =====
+    // ===== SCROLL STOP AT EMAIL CENTER =====
+    lenis.on('scroll', ({ scroll }) => {
         const contactLink = document.querySelector('.contact-link');
         if (contactLink) {
             const rect = contactLink.getBoundingClientRect();
@@ -182,13 +116,11 @@
         });
 
         function animateCursor() {
-            // Main cursor follows immediately
             cursorX = mouseX;
             cursorY = mouseY;
             cursor.style.left = cursorX + 'px';
             cursor.style.top = cursorY + 'px';
 
-            // Follower has delay (elegant trailing effect)
             followerX += (mouseX - followerX) * 0.15;
             followerY += (mouseY - followerY) * 0.15;
             cursorFollower.style.left = followerX + 'px';
@@ -199,8 +131,7 @@
 
         animateCursor();
 
-        // Hover effects on interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .contact-link, .nav-brand');
+        const interactiveElements = document.querySelectorAll('a, button, .contact-link, .nav-credit');
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.classList.add('hover');
