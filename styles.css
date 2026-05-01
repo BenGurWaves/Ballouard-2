@@ -6,16 +6,11 @@
 :root {
     --dark: #1a1a1a;
     --neutral: #faf9f7;
-    --cream: #f5f0e6;     /* Aged parchment */
-    --accent: #8b8378;
-    --warm: #c4a77d;      /* Antique gold */
-    --terracotta: #b8907a; /* Aged leather */
-    --navy: #1e2a3a;      /* Midnight watch dial */
-    --burgundy: #4a1c2c;  /* Aged wine leather */
-    --forest: #1f3320;    /* Vintage patina green */
-    --sage: #8b9a7d;      /* Muted sage */
-    --taupe: #6b5b4f;     /* Rich brown leather */
-    --ochre: #a67c52;     /* Classic ochre */
+    --accent: #A49D95;      /* Bottom swatch - light warm gray */
+    --primary: #796F66;     /* Top swatch - warm taupe */
+    --secondary: #A79976;   /* Second swatch - sage beige */
+    --tertiary: #654530;    /* Third swatch - deep brown */
+    --warm: #A79976;        /* Same as secondary for highlights */
     --phi: 1.618;
     --section-padding: calc(100vh / var(--phi));
 }
@@ -170,7 +165,7 @@ a, button, .contact-link {
     font-weight: 400;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--warm);
+    color: var(--primary);
 }
 
 /* Swiss Style Grid System - Mathematical precision */
@@ -190,13 +185,13 @@ a, button, .contact-link {
     position: relative;
 }
 
-/* Hero Section - Editorial asymmetry with cream warmth */
+/* Hero Section - Editorial asymmetry with neutral warmth */
 .hero {
     align-items: flex-start;
     justify-content: center;
     text-align: left;
     padding-left: calc(10vw * var(--phi));
-    background: linear-gradient(135deg, var(--neutral) 0%, var(--cream) 100%);
+    background: var(--neutral);
 }
 
 .hero-content {
@@ -211,10 +206,7 @@ a, button, .contact-link {
     line-height: 0.95;
     margin-bottom: calc(2rem / var(--phi));
     transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
-    background: linear-gradient(135deg, var(--dark) 0%, #3a3a3a 50%, var(--warm) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary);
 }
 
 .mega-headline .word {
@@ -261,21 +253,21 @@ a, button, .contact-link {
     opacity: 0.5;
 }
 
-/* Split Section - Navy sophistication */
+/* Split Section - Warm taupe sophistication */
 .split {
     flex-direction: row;
     align-items: stretch;
     padding: 0;
-    background: var(--navy);
-    color: var(--cream);
+    background: var(--primary);
+    color: var(--neutral);
 }
 
 .split .body-text {
-    color: var(--cream);
+    color: var(--neutral);
 }
 
 .split-right .body-text:first-of-type::first-letter {
-    color: var(--warm);
+    color: var(--secondary);
 }
 
 .split-left {
@@ -302,30 +294,30 @@ a, button, .contact-link {
     letter-spacing: -0.04em;
     line-height: 0.9;
     transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
-    color: var(--terracotta);
+    color: var(--secondary);
     opacity: 0.9;
 }
 
-/* Centered Section - Forest green vintage */
+/* Centered Section - Sage beige warmth */
 .centered {
     align-items: flex-start;
     text-align: left;
     padding-left: calc(15vw * var(--phi));
     max-width: 900px;
-    background: linear-gradient(180deg, var(--forest) 0%, #2a4230 100%);
-    color: var(--cream);
+    background: var(--secondary);
+    color: var(--dark);
 }
 
 .centered .body-text {
-    color: var(--cream);
+    color: var(--dark);
 }
 
 .centered .body-text:first-of-type::first-letter {
-    color: var(--sage);
+    color: var(--tertiary);
 }
 
 .centered .location-line {
-    color: var(--sage);
+    color: var(--primary);
 }
 
 .floating-headline {
@@ -337,7 +329,7 @@ a, button, .contact-link {
     margin-bottom: calc(3rem / var(--phi));
     transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
     font-style: italic;
-    color: var(--warm);
+    color: var(--tertiary);
 }
 
 .body-text {
@@ -360,7 +352,7 @@ a, button, .contact-link {
     float: left;
     margin-right: 0.1em;
     margin-top: 0.05em;
-    color: var(--warm);
+    color: var(--secondary);
 }
 
 .body-text.large {
@@ -383,16 +375,16 @@ a, button, .contact-link {
     letter-spacing: 0.1em;
 }
 
-/* Inverted Section - Burgundy wine leather */
+/* Inverted Section - Deep brown warmth */
 .inverted {
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--burgundy) 0%, #3d1a28 100%);
-    color: var(--cream);
+    background: var(--tertiary);
+    color: var(--neutral);
 }
 
 .inverted .body-text {
-    color: var(--cream);
+    color: var(--neutral);
 }
 
 .inverted-content {
@@ -408,7 +400,7 @@ a, button, .contact-link {
     line-height: 1.1;
     margin-bottom: calc(3rem / var(--phi));
     transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
-    color: var(--warm);
+    color: var(--secondary);
 }
 
 .inverted .body-text {
@@ -416,24 +408,24 @@ a, button, .contact-link {
     max-width: 400px;
 }
 
-/* Staggered Grid Section - Warm taupe leather */
+/* Staggered Grid Section - Light warm gray */
 .staggered {
     padding: 8rem 4rem;
-    background: linear-gradient(135deg, var(--taupe) 0%, var(--ochre) 100%);
-    color: var(--cream);
+    background: var(--accent);
+    color: var(--dark);
 }
 
 .staggered .body-text {
-    color: var(--cream);
+    color: var(--dark);
 }
 
 .staggered .label {
-    color: var(--cream);
+    color: var(--primary);
     opacity: 0.9;
 }
 
 .staggered .number {
-    color: var(--cream);
+    color: var(--tertiary);
 }
 
 .staggered-grid {
@@ -493,17 +485,17 @@ a, button, .contact-link {
     margin-top: 1rem;
 }
 
-/* Contact Section - Deep charcoal with warm undertones */
+/* Contact Section - Neutral with primary accent */
 .contact-section {
     align-items: center;
     justify-content: center;
     min-height: 50vh;
-    background: linear-gradient(180deg, #2a2520 0%, var(--dark) 100%);
-    color: var(--cream);
+    background: var(--neutral);
+    color: var(--dark);
 }
 
 .contact-section .contact-label {
-    color: var(--sage);
+    color: var(--primary);
 }
 
 .contact-block {
@@ -522,36 +514,36 @@ a, button, .contact-link {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 300;
-    color: var(--warm);
+    color: var(--primary);
     text-decoration: none;
-    border-bottom: 1px solid var(--terracotta);
+    border-bottom: 1px solid var(--secondary);
     padding-bottom: 0.5rem;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     letter-spacing: 0.02em;
 }
 
 .contact-link:hover {
-    border-color: var(--warm);
-    color: var(--dark);
+    border-color: var(--tertiary);
+    color: var(--tertiary);
     letter-spacing: 0.05em;
 }
 
 .contact-divider {
     width: 100px;
     height: 1px;
-    background: linear-gradient(90deg, var(--accent), var(--warm));
+    background: linear-gradient(90deg, var(--accent), var(--primary));
     margin: 2rem auto;
 }
 
-/* Warm accent on scroll indicator */
+/* Scroll indicator */
 .scroll-line {
     width: 1px;
     height: 80px;
-    background: linear-gradient(180deg, var(--warm), var(--accent));
+    background: linear-gradient(180deg, var(--primary), var(--accent));
     opacity: 0.7;
 }
 
-/* Number accent color */
+/* Number accent */
 .number.half::after {
     content: '';
     position: absolute;
@@ -559,14 +551,14 @@ a, button, .contact-link {
     left: -10%;
     right: -10%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--warm), transparent);
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
 }
 
 .contact-year {
     font-family: 'Inter', sans-serif;
     font-size: 0.8rem;
     letter-spacing: 0.1em;
-    color: var(--warm);
+    color: var(--primary);
 }
 
 /* Temporal Focus - Refined for timeless elegance */
@@ -649,12 +641,16 @@ a, button, .contact-link {
     color: var(--accent);
 }
 
+.footer-combined .contact-year {
+    color: var(--primary);
+}
+
 .velocity {
     font-family: 'Cormorant Garamond', serif;
     font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.15em;
-    color: var(--warm);
+    color: var(--tertiary);
     font-style: italic;
     text-transform: uppercase;
 }
