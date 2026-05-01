@@ -1,29 +1,26 @@
 /**
- * Ballouard — The Timekeeper's Dial
+ * Ballouard — The Guilloché Reveal
  * A Velocity Website
  * 
- * Navigation: No scroll. Click & drag to rotate. Click markers to expand.
- * Metaphor: A watch face with complications arranged around a dial.
- * Palette: Classic watch dial - deep black, gold accents, warm silver
- * Typefaces: Playfair Display (elegance) + Source Sans 3 (clarity)
- * Invention: "Rotating Dial Navigation" — navigate like turning a watch crown
+ * Navigation: Standard scroll, but the guilloché pattern spiral-cuts away.
+ * Metaphor: The intricate engraved pattern on luxury watch dials revealing content.
+ * Palette: Weathered Bronze (warm, elegant, non-AI looking)
+ * Typefaces: Cormorant Garamond (elegance) + Inter (clarity)
+ * Invention: "Spiral Guilloché Reveal" — scroll to cut through the pattern
  */
 
 :root {
-    /* The Timekeeper's Palette */
-    --dial-black: #0d0d0d;      /* Deep matte dial */
-    --gold: #c9a961;            /* Warm gold indices */
-    --silver: #a0a0a0;          /* Cool silver text */
-    --white: #f5f5f0;           /* Warm white hands/text */
-    --track: #2a2a2a;           /* Subtle track ring */
-    
-    /* Dial Dimensions */
-    --dial-radius: 45vmin;
-    --marker-distance: 40vmin;
+    /* The Weathered Bronze Palette */
+    --primary: #796F66;         /* Warm taupe */
+    --secondary: #A79976;       /* Sage beige */
+    --tertiary: #654530;        /* Deep brown */
+    --quaternary: #A49D95;      /* Light warm gray */
+    --neutral: #faf9f7;         /* Cream neutral */
+    --dark: #1a1a1a;           /* Soft black */
     
     /* Typography */
-    --font-elegant: 'Playfair Display', serif;
-    --font-clean: 'Source Sans 3', sans-serif;
+    --font-elegant: 'Cormorant Garamond', serif;
+    --font-clean: 'Inter', sans-serif;
 }
 
 * {
@@ -33,19 +30,29 @@
     user-select: none;
 }
 
-html, body {
-    height: 100%;
-    overflow: hidden;
+html {
+    scroll-behavior: auto;
 }
 
 body {
     font-family: var(--font-clean);
-    background: var(--dial-black);
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--neutral);
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+}
+
+/* Guilloché Canvas Overlay */
+.guilloche-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+    mix-blend-mode: multiply;
 }
 
 /* Velocity Signature */
@@ -56,24 +63,273 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    z-index: 100;
+    z-index: 50;
+    mix-blend-mode: difference;
 }
 
 .velocity-mark {
     font-family: var(--font-clean);
     font-size: 1rem;
     font-weight: 400;
-    color: var(--gold);
+    color: var(--secondary);
     letter-spacing: 0.1em;
 }
 
 .velocity-line {
     width: 20px;
     height: 1px;
-    background: var(--silver);
+    background: var(--quaternary);
 }
 
 .velocity-text {
+    font-family: var(--font-clean);
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: var(--quaternary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* Scroll Progress */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    z-index: 60;
+    background: var(--quaternary);
+    opacity: 0.3;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--tertiary);
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+/* Content Container */
+.content-container {
+    position: relative;
+    z-index: 10;
+}
+
+/* Content Sections */
+.content-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    position: relative;
+}
+
+.section-content {
+    max-width: 700px;
+    text-align: center;
+    position: relative;
+}
+
+.section-number {
+    position: absolute;
+    font-family: var(--font-elegant);
+    font-size: clamp(8rem, 20vw, 15rem);
+    font-weight: 300;
+    color: var(--quaternary);
+    opacity: 0.15;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Hero Section */
+.hero-title {
+    font-family: var(--font-elegant);
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-family: var(--font-clean);
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+/* Section Labels */
+.section-label {
+    font-family: var(--font-clean);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+/* Section Titles */
+.section-title {
+    font-family: var(--font-elegant);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--tertiary);
+    margin-bottom: 2rem;
+    line-height: 1.1;
+}
+
+/* Section Text */
+.section-text {
+    font-family: var(--font-clean);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--dark);
+    max-width: 50ch;
+    margin: 0 auto 1.5rem;
+}
+
+.section-text.secondary {
+    color: var(--primary);
+    font-style: italic;
+}
+
+.section-text.large {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    max-width: 45ch;
+}
+
+.section-text.philosophy {
+    color: var(--secondary);
+    font-weight: 400;
+}
+
+/* Fraction Display */
+.fraction-display {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.numerator, .denominator {
+    font-family: var(--font-elegant);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    color: var(--tertiary);
+    line-height: 1;
+}
+
+.fraction-line {
+    width: 60px;
+    height: 2px;
+    background: var(--secondary);
+    margin: 0.5rem 0;
+}
+
+/* Contact Link */
+.contact-link {
+    font-family: var(--font-elegant);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--tertiary);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color 0.4s ease;
+}
+
+.contact-link:hover {
+    color: var(--primary);
+}
+
+.contact-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--secondary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+}
+
+.contact-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Velocity Footer */
+.velocity-footer {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.velocity-footer span {
+    font-family: var(--font-clean);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+/* Guilloché Hint */
+.guilloche-hint {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: difference;
+}
+
+.guilloche-hint:hover {
+    opacity: 1;
+}
+
+.hint-line {
+    font-family: var(--font-clean);
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--quaternary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .content-section {
+        padding: 2rem;
+    }
+    
+    .velocity-signature {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .velocity-text {
+        display: none;
+    }
+    
+    .section-number {
+        font-size: 6rem;
+    }
+}
     font-family: var(--font-clean);
     font-size: 0.6rem;
     font-weight: 300;

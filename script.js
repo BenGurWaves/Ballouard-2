@@ -1,164 +1,155 @@
 /**
- * Ballouard — The Timekeeper's Dial
+ * Ballouard — The Guilloché Reveal
  * A Velocity Website
  * 
- * Navigation: NO SCROLL. Click & drag to rotate. Click markers to expand.
- * Invention: "Rotating Dial Navigation" — like turning a watch crown
+ * Navigation: Standard scroll, but the guilloché pattern spiral-cuts away.
+ * Invention: "Spiral Guilloché Reveal" — Canvas pattern reveals content on scroll
  */
 
 (function() {
     'use strict';
 
-    const dialRing = document.getElementById('dialRing');
-    const markers = document.querySelectorAll('.dial-marker');
+    const canvas = document.getElementById('guillocheCanvas');
+    const ctx = canvas.getContext('2d');
+    const progressBar = document.querySelector('.progress-bar');
     
-    let currentRotation = 0;
-    let isDragging = false;
-    let startAngle = 0;
-    let startRotation = 0;
-    let activeIndex = 0;
+    let scrollProgress = 0;
+    let targetProgress = 0;
+    let animationId = null;
 
-    // Position markers in a circle
-    function positionMarkers() {
-        const radius = Math.min(window.innerWidth, window.innerHeight) * 0.4;
-        
-        markers.forEach((marker, index) => {
-            const baseAngle = parseFloat(marker.dataset.angle);
-            // Position around the dial
-            marker.style.transform = `rotate(${baseAngle}deg) translateY(-${radius}px) rotate(-${baseAngle}deg)`;
-        });
+    // Guilloché pattern parameters
+    const waves = [
+        { freq: 20, amp: 15, speed: 0.002, phase: 0 },
+        { freq: 15, amp: 10, speed: 0.003, phase: Math.PI / 3 },
+        { freq: 25, amp: 8, speed: 0.0015, phase: Math.PI / 2 },
+        { freq: 12, amp: 12, speed: 0.0025, phase: Math.PI }
+    ];
+
+    // Resize canvas
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    // Get angle from center to point
-    function getAngle(x, y) {
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-        return Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
-    }
-
-    // Update which marker is active (at 12 o'clock position)
-    function updateActiveMarker() {
-        // Normalize rotation to 0-360
-        const normalizedRotation = ((currentRotation % 360) + 360) % 360;
+    // Draw guilloché pattern
+    function drawGuilloche() {
+        const width = canvas.width;
+        const height = canvas.height;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const maxRadius = Math.sqrt(width * width + height * height) / 2;
         
-        // Find which marker is closest to top (0 degrees / 360 degrees)
-        // Top position corresponds to -currentRotation
-        const targetAngle = (360 - normalizedRotation) % 360;
+        // Clear canvas
+        ctx.clearRect(0, 0, width, height);
         
-        let closestIndex = 0;
-        let closestDistance = Infinity;
+        // Calculate reveal radius based on scroll progress
+        // 0 = full pattern (no reveal)
+        // 1 = fully revealed (pattern completely cut away)
+        const revealRadius = maxRadius * scrollProgress * 1.5;
         
-        markers.forEach((marker, index) => {
-            const markerAngle = parseFloat(marker.dataset.angle);
-            const distance = Math.abs(markerAngle - targetAngle);
-            const wrapDistance = Math.abs(markerAngle - (targetAngle + 360));
-            const minDistance = Math.min(distance, wrapDistance);
+        // Draw pattern
+        ctx.strokeStyle = '#796F66';
+        ctx.lineWidth = 1;
+        
+        // Create spiral wave pattern
+        for (let r = 0; r < maxRadius; r += 3) {
+            // Check if this ring should be visible
+            // Pattern is visible when r > revealRadius (outside the cut)
+            if (r < revealRadius) continue;
             
-            if (minDistance < closestDistance) {
-                closestDistance = minDistance;
-                closestIndex = index;
+            ctx.beginPath();
+            
+            for (let angle = 0; angle <= Math.PI * 2; angle += 0.02) {
+                // Calculate wave displacement
+                let displacement = 0;
+                waves.forEach((wave, i) => {
+                    displacement += Math.sin(angle * wave.freq + wave.phase + r * wave.speed) * wave.amp;
+                });
+                
+                // Add spiral twist
+                const spiralOffset = r * 0.01;
+                const finalAngle = angle + spiralOffset;
+                
+                const x = centerX + Math.cos(finalAngle) * (r + displacement);
+                const y = centerY + Math.sin(finalAngle) * (r + displacement);
+                
+                if (angle === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
             }
             
-            marker.classList.remove('active');
-        });
-        
-        markers[closestIndex].classList.add('active');
-        activeIndex = closestIndex;
-    }
-
-    // Rotate to a specific marker
-    function rotateToMarker(index) {
-        const targetAngle = parseFloat(markers[index].dataset.angle);
-        // Calculate shortest rotation to get this marker to top (0 degrees)
-        const targetRotation = -targetAngle;
-        
-        // Animate to target
-        dialRing.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-        currentRotation = targetRotation;
-        dialRing.style.transform = `rotate(${currentRotation}deg)`;
-        
-        setTimeout(() => {
-            dialRing.style.transition = '';
-            updateActiveMarker();
-        }, 600);
-    }
-
-    // Mouse/Touch Events for Dragging
-    function startDrag(e) {
-        isDragging = true;
-        const x = e.clientX || (e.touches && e.touches[0].clientX);
-        const y = e.clientY || (e.touches && e.touches[0].clientY);
-        startAngle = getAngle(x, y);
-        startRotation = currentRotation;
-        dialRing.style.cursor = 'grabbing';
-    }
-
-    function drag(e) {
-        if (!isDragging) return;
-        e.preventDefault();
-        
-        const x = e.clientX || (e.touches && e.touches[0].clientX);
-        const y = e.clientY || (e.touches && e.touches[0].clientY);
-        const currentAngle = getAngle(x, y);
-        
-        const angleDiff = currentAngle - startAngle;
-        currentRotation = startRotation + angleDiff;
-        
-        dialRing.style.transform = `rotate(${currentRotation}deg)`;
-        updateActiveMarker();
-    }
-
-    function endDrag() {
-        isDragging = false;
-        dialRing.style.cursor = 'grab';
-        
-        // Snap to nearest marker
-        const normalizedRotation = ((currentRotation % 360) + 360) % 360;
-        const targetAngle = (360 - normalizedRotation) % 360;
-        
-        let closestIndex = 0;
-        let closestDistance = Infinity;
-        
-        markers.forEach((marker, index) => {
-            const markerAngle = parseFloat(marker.dataset.angle);
-            const distance = Math.abs(markerAngle - targetAngle);
-            const wrapDistance = Math.abs(markerAngle - (targetAngle + 360));
-            const minDistance = Math.min(distance, wrapDistance);
+            ctx.closePath();
             
-            if (minDistance < closestDistance) {
-                closestDistance = minDistance;
-                closestIndex = index;
+            // Gradient opacity based on distance from reveal edge
+            const distanceFromReveal = r - revealRadius;
+            const maxFade = 100;
+            let opacity = 1;
+            
+            if (distanceFromReveal < maxFade) {
+                opacity = distanceFromReveal / maxFade;
             }
-        });
+            
+            // Fade pattern at outer edges too
+            if (r > maxRadius - 50) {
+                opacity *= (maxRadius - r) / 50;
+            }
+            
+            ctx.globalAlpha = Math.max(0, Math.min(1, opacity * 0.6));
+            ctx.stroke();
+        }
         
-        rotateToMarker(closestIndex);
+        ctx.globalAlpha = 1;
     }
 
-    // Click on markers to rotate to them
-    markers.forEach((marker, index) => {
-        marker.addEventListener('click', (e) => {
-            if (isDragging) return;
-            e.stopPropagation();
-            rotateToMarker(index);
-        });
+    // Smooth scroll animation loop
+    function animate() {
+        // Lerp scrollProgress toward targetProgress
+        const diff = targetProgress - scrollProgress;
+        if (Math.abs(diff) > 0.001) {
+            scrollProgress += diff * 0.1;
+            drawGuilloche();
+            
+            // Update progress bar
+            if (progressBar) {
+                progressBar.style.width = (scrollProgress * 100) + '%';
+            }
+        }
+        
+        animationId = requestAnimationFrame(animate);
+    }
+
+    // Scroll handler
+    function handleScroll() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        targetProgress = Math.min(1, Math.max(0, scrollTop / docHeight));
+    }
+
+    // Lenis smooth scroll
+    const lenis = new Lenis({
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1,
     });
 
-    // Dial ring events
-    dialRing.addEventListener('mousedown', startDrag);
-    dialRing.addEventListener('touchstart', startDrag, { passive: false });
-    
-    window.addEventListener('mousemove', drag);
-    window.addEventListener('touchmove', drag, { passive: false });
-    
-    window.addEventListener('mouseup', endDrag);
-    window.addEventListener('touchend', endDrag);
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
-    // Initialize
-    positionMarkers();
-    updateActiveMarker();
-    
-    // Handle resize
-    window.addEventListener('resize', () => {
-        positionMarkers();
-    });
+    // Sync Lenis with our scroll handler
+    lenis.on('scroll', handleScroll);
+
+    // Start animation loop
+    animate();
+
+    // Initial draw
+    drawGuilloche();
 })();
