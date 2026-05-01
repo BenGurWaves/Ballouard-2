@@ -80,8 +80,32 @@
     requestAnimationFrame(raf);
 
     // Sync Lenis scroll with temporal focus
-    lenis.on('scroll', () => {
+    lenis.on('scroll', ({ scroll }) => {
         applyTemporalFocus();
+        
+        // ===== SCROLL STOP AT EMAIL CENTER =====
+        const contactLink = document.querySelector('.contact-link');
+        if (contactLink) {
+            const rect = contactLink.getBoundingClientRect();
+            const emailCenter = rect.top + rect.height / 2;
+            const viewportCenter = window.innerHeight / 2;
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            
+            // If email is at or past center, stop scrolling
+            if (emailCenter <= viewportCenter && scroll < maxScroll) {
+                // Calculate scroll position where email is centered
+                const emailOffset = rect.top + window.scrollY - viewportCenter + rect.height / 2;
+                
+                // Stop Lenis and set to email center position
+                lenis.stop();
+                lenis.scrollTo(emailOffset, { immediate: true });
+                
+                // Prevent further scrolling
+                setTimeout(() => {
+                    lenis.destroy();
+                }, 100);
+            }
+        }
     });
 
     // ===== ELEGANT CUSTOM CURSOR =====
