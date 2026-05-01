@@ -6,9 +6,16 @@
 :root {
     --dark: #1a1a1a;
     --neutral: #faf9f7;
+    --cream: #f5f0e6;     /* Aged parchment */
     --accent: #8b8378;
-    --warm: #c4a77d;      /* Warm bronze gold - elegant accent */
-    --terracotta: #b8907a; /* Muted terracotta - sophisticated */
+    --warm: #c4a77d;      /* Antique gold */
+    --terracotta: #b8907a; /* Aged leather */
+    --navy: #1e2a3a;      /* Midnight watch dial */
+    --burgundy: #4a1c2c;  /* Aged wine leather */
+    --forest: #1f3320;    /* Vintage patina green */
+    --sage: #8b9a7d;      /* Muted sage */
+    --taupe: #6b5b4f;     /* Rich brown leather */
+    --ochre: #a67c52;     /* Classic ochre */
     --phi: 1.618;
     --section-padding: calc(100vh / var(--phi));
 }
@@ -183,12 +190,13 @@ a, button, .contact-link {
     position: relative;
 }
 
-/* Hero Section - Editorial asymmetry */
+/* Hero Section - Editorial asymmetry with cream warmth */
 .hero {
     align-items: flex-start;
     justify-content: center;
     text-align: left;
     padding-left: calc(10vw * var(--phi));
+    background: linear-gradient(135deg, var(--neutral) 0%, var(--cream) 100%);
 }
 
 .hero-content {
@@ -253,11 +261,21 @@ a, button, .contact-link {
     opacity: 0.5;
 }
 
-/* Split Section */
+/* Split Section - Navy sophistication */
 .split {
     flex-direction: row;
     align-items: stretch;
     padding: 0;
+    background: var(--navy);
+    color: var(--cream);
+}
+
+.split .body-text {
+    color: var(--cream);
+}
+
+.split-right .body-text:first-of-type::first-letter {
+    color: var(--warm);
 }
 
 .split-left {
@@ -288,12 +306,26 @@ a, button, .contact-link {
     opacity: 0.9;
 }
 
-/* Centered Section - Swiss asymmetry applied */
+/* Centered Section - Forest green vintage */
 .centered {
     align-items: flex-start;
     text-align: left;
     padding-left: calc(15vw * var(--phi));
     max-width: 900px;
+    background: linear-gradient(180deg, var(--forest) 0%, #2a4230 100%);
+    color: var(--cream);
+}
+
+.centered .body-text {
+    color: var(--cream);
+}
+
+.centered .body-text:first-of-type::first-letter {
+    color: var(--sage);
+}
+
+.centered .location-line {
+    color: var(--sage);
 }
 
 .floating-headline {
@@ -351,12 +383,16 @@ a, button, .contact-link {
     letter-spacing: 0.1em;
 }
 
-/* Inverted Section */
+/* Inverted Section - Burgundy wine leather */
 .inverted {
     align-items: center;
     justify-content: center;
-    background: var(--dark);
-    color: var(--neutral);
+    background: linear-gradient(135deg, var(--burgundy) 0%, #3d1a28 100%);
+    color: var(--cream);
+}
+
+.inverted .body-text {
+    color: var(--cream);
 }
 
 .inverted-content {
@@ -380,9 +416,24 @@ a, button, .contact-link {
     max-width: 400px;
 }
 
-/* Staggered Grid Section */
+/* Staggered Grid Section - Warm taupe leather */
 .staggered {
     padding: 8rem 4rem;
+    background: linear-gradient(135deg, var(--taupe) 0%, var(--ochre) 100%);
+    color: var(--cream);
+}
+
+.staggered .body-text {
+    color: var(--cream);
+}
+
+.staggered .label {
+    color: var(--cream);
+    opacity: 0.9;
+}
+
+.staggered .number {
+    color: var(--cream);
 }
 
 .staggered-grid {
@@ -442,11 +493,17 @@ a, button, .contact-link {
     margin-top: 1rem;
 }
 
-/* Contact Section */
+/* Contact Section - Deep charcoal with warm undertones */
 .contact-section {
     align-items: center;
     justify-content: center;
     min-height: 50vh;
+    background: linear-gradient(180deg, #2a2520 0%, var(--dark) 100%);
+    color: var(--cream);
+}
+
+.contact-section .contact-label {
+    color: var(--sage);
 }
 
 .contact-block {
