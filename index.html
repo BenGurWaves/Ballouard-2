@@ -3,115 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ballouard – Only the present moment has a meaning</title>
+    <title>Ballouard — The Chronometer's Breath</title>
+    <meta name="description" content="A Velocity Website. Only the present moment has a meaning.">
+    
+    <!-- Typefaces: Space Grotesk (technical precision) + Crimson Pro (literary warmth) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@200;300;400;500&family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
-    <!-- Lenis Smooth Scroll -->
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 </head>
 <body>
-    <!-- Page Loader -->
-    <div class="page-loader">
-        <div class="loader-content">
-            <span class="loader-text">Ballouard</span>
-            <div class="loader-line"></div>
-        </div>
+    <!-- Escapement Mechanism - Central fixed point -->
+    <div class="escapement-anchor">
+        <div class="anchor-pivot"></div>
+        <div class="balance-wheel"></div>
     </div>
-
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
     
-    <nav class="floating-nav">
-        <span class="nav-credit">Velocity</span>
-    </nav>
+    <!-- Velocity Signature -->
+    <div class="velocity-mark">
+        <span class="mark-text">V</span>
+        <span class="mark-line"></span>
+        <span class="mark-label">Velocity Digital Atelier</span>
+    </div>
+    
+    <!-- Tension Indicator (follows cursor subtly) -->
+    <div class="tension-field"></div>
 
-    <main class="flow-container">
-        <section class="moment hero" data-moment="present">
-            <div class="hero-content">
-                <h1 class="mega-headline temporal-text">
-                    Ballouard
-                </h1>
-                <p class="mega-tagline temporal-text">
-                    Only the present moment has a meaning
-                </p>
+    <main class="chronometer">
+        <!-- Orbit 1: The Present (closest, sharpest) -->
+        <div class="orbit present-orbit" data-phase="0">
+            <div class="breathing-node">
+                <h1 class="chronometer-title">Ballouard</h1>
+                <p class="chronometer-subtitle">Only the present moment has a meaning</p>
             </div>
-            <div class="scroll-indicator temporal-text">
-                <span class="scroll-text">descend</span>
-                <div class="scroll-line"></div>
-            </div>
-        </section>
+        </div>
 
-        <section class="moment split" data-moment="philosophy">
-            <div class="split-left">
-                <p class="massive-text temporal-text">Time</p>
-            </div>
-            <div class="split-right">
-                <p class="body-text temporal-text">
+        <!-- Orbit 2: The Philosophy (medium distance) -->
+        <div class="orbit philosophy-orbit" data-phase="72">
+            <div class="breathing-node philosophy-content">
+                <span class="orbit-label">Time</span>
+                <p class="orbit-text">
                     We live in an exciting and exhilarating time. Today's technologies give us the feeling of being able to do more, faster, yet are we perhaps losing a small piece of what makes us human?
                 </p>
-                <p class="body-text temporal-text">
+                <p class="orbit-text secondary">
                     With this in mind we propose taking a step to the side.
                 </p>
             </div>
-        </section>
+        </div>
 
-        <section class="moment centered" data-moment="craft">
-            <h2 class="floating-headline temporal-text">The Atelier</h2>
-            <p class="body-text large temporal-text">
-                <span class="drop-l">L</span>udovic Ballouard's unique and high quality timepieces deeply question our relationship with time, whilst never forgetting to add a touch of humor.
-            </p>
-            <div class="atelier-location temporal-text">
-                <span class="location-line">Avusy</span>
-                <span class="location-line">Switzerland</span>
+        <!-- Orbit 3: The Atelier -->
+        <div class="orbit atelier-orbit" data-phase="144">
+            <div class="breathing-node atelier-content">
+                <span class="orbit-label craft">The Atelier</span>
+                <p class="orbit-text craft-text">
+                    Ludovic Ballouard's unique and high quality timepieces deeply question our relationship with time, whilst never forgetting to add a touch of humor.
+                </p>
+                <div class="location-marker">
+                    <span class="marker-point">Avusy</span>
+                    <span class="marker-line"></span>
+                    <span class="marker-point">Switzerland</span>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <section class="moment inverted" data-moment="upside-down">
-            <div class="inverted-content">
-                <p class="inverted-text temporal-text">Upside Down</p>
-                <p class="body-text temporal-text">
+        <!-- Orbit 4: The Invention -->
+        <div class="orbit invention-orbit" data-phase="216">
+            <div class="breathing-node invention-content">
+                <span class="orbit-label invention">Upside Down</span>
+                <p class="orbit-text invention-text">
                     The past time and the future time are, literally, presented upside down.
                 </p>
-                <p class="body-text temporal-text">
+                <p class="orbit-text invention-philosophy">
                     No regrets about the past. No qualms for the future.
                 </p>
             </div>
-        </section>
+        </div>
 
-        <section class="moment staggered" data-moment="half-time">
-            <div class="staggered-grid">
-                <div class="grid-item temporal-text">
-                    <span class="number half">½</span>
-                    <span class="label">Half Time</span>
+        <!-- Orbit 5: Half Time -->
+        <div class="orbit halftime-orbit" data-phase="288">
+            <div class="breathing-node halftime-content">
+                <div class="fraction-display">
+                    <span class="numerator">1</span>
+                    <span class="fraction-line"></span>
+                    <span class="denominator">2</span>
                 </div>
-                <div class="grid-item temporal-text">
-                    <p class="body-text">
-                        The numeral that gives you the time is whole at 12 o'clock while the rest are cut in half.
-                    </p>
-                </div>
-                <div class="grid-item temporal-text">
-                    <p class="body-text">
-                        Perpetually reminding you that the most important time is the present.
-                    </p>
+                <span class="orbit-label halftime-label">Half Time</span>
+                <p class="orbit-text halftime-explanation">
+                    The numeral that gives you the time is whole at 12 o'clock while the rest are cut in half. Perpetually reminding you that the most important time is the present.
+                </p>
+            </div>
+        </div>
+
+        <!-- Orbit 6: Contact (final position) -->
+        <div class="orbit contact-orbit" data-phase="360">
+            <div class="breathing-node contact-content">
+                <a href="mailto:info@ballouard.com" class="escapement-link" data-tension="high">
+                    info@ballouard.com
+                </a>
+                <div class="velocity-signature">
+                    <span class="signature-mark">A Velocity Website</span>
+                    <span class="signature-year">© 2026</span>
                 </div>
             </div>
-        </section>
-
-        <section class="moment contact-section" data-moment="contact">
-            <div class="contact-block temporal-text">
-                <p class="contact-label">Connect</p>
-                <a href="mailto:info@ballouard.com" class="contact-link">info@ballouard.com</a>
-                <div class="contact-divider"></div>
-                <div class="footer-combined">
-                    <p class="contact-year">© Velocity 2026</p>
-                    <p class="velocity-line">Digital Atelier crafted by <span class="velocity">Velocity</span></p>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
+
+    <!-- Scroll Progress (escapement wheel visualization) -->
+    <div class="escapement-progress">
+        <svg viewBox="0 0 100 100" class="progress-wheel">
+            <circle class="wheel-track" cx="50" cy="50" r="45"/>
+            <circle class="wheel-fill" cx="50" cy="50" r="45"/>
+        </svg>
+    </div>
 
     <script src="script.js"></script>
 </body>
