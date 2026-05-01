@@ -357,6 +357,15 @@ a, button, .contact-link {
     color: var(--secondary);
 }
 
+/* Drop L for Ludovic - ensure visibility */
+.drop-l {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1em;
+    font-weight: 300;
+    color: var(--tertiary);
+    display: inline;
+}
+
 .body-text.large {
     font-size: clamp(1.1rem, 1.5vw, 1.25rem);
     line-height: 1.8;
@@ -453,6 +462,18 @@ a, button, .contact-link {
 @keyframes rotateMinute {
     from { transform: rotate(180deg); }
     to { transform: rotate(540deg); }
+}
+
+/* Upside Down Flip - text starts upside down, flips on hover/tap */
+.upside-down-flip {
+    transform: rotate(180deg);
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    display: inline-block;
+}
+
+.inverted-content:hover .upside-down-flip,
+.inverted-content:active .upside-down-flip {
+    transform: rotate(0deg);
 }
 
 .inverted .body-text {
