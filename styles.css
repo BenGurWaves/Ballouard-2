@@ -1,118 +1,341 @@
 /**
- * Ballouard — The Chronometer's Breath
+ * Ballouard — The Timekeeper's Dial
  * A Velocity Website
  * 
- * Metaphor: Time as living mechanism, breathing at 3Hz (21,600 vph)
- * Palette: Mercury fulminate + Tarnished silver (watchmaking materials)
- * Typefaces: Space Grotesk (technical) + Crimson Pro (literary)
- * Invention: "Escapement Tension" — magnetic cursor resistance
+ * Navigation: No scroll. Click & drag to rotate. Click markers to expand.
+ * Metaphor: A watch face with complications arranged around a dial.
+ * Palette: Classic watch dial - deep black, gold accents, warm silver
+ * Typefaces: Playfair Display (elegance) + Source Sans 3 (clarity)
+ * Invention: "Rotating Dial Navigation" — navigate like turning a watch crown
  */
 
 :root {
-    /* The Chronometer's Breath Palette */
-    --gunmetal: #1a1d21;        /* Deep oxidized watch case */
-    --tarnished: #6b7280;       /* Aged dial with blue undertone */
-    --escapement: #d4af37;       /* Bridge screws, Velocity gold */
-    --mercury: #f8fafc;         /* Cold highlight shimmer */
-    --shadow: #0f1114;          /* Deepest recess */
+    /* The Timekeeper's Palette */
+    --dial-black: #0d0d0d;      /* Deep matte dial */
+    --gold: #c9a961;            /* Warm gold indices */
+    --silver: #a0a0a0;          /* Cool silver text */
+    --white: #f5f5f0;           /* Warm white hands/text */
+    --track: #2a2a2a;           /* Subtle track ring */
     
-    /* Escapement Timing — 3 second breath cycle */
-    --breath-duration: 3s;
-    --breath-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    /* Dial Dimensions */
+    --dial-radius: 45vmin;
+    --marker-distance: 40vmin;
     
-    /* Tension Physics */
-    --tension-radius: 200px;
-    --tension-strength: 0.15;
-    
-    /* Typography Scale */
-    --type-primary: 'Space Grotesk', sans-serif;
-    --type-secondary: 'Crimson Pro', serif;
+    /* Typography */
+    --font-elegant: 'Playfair Display', serif;
+    --font-clean: 'Source Sans 3', sans-serif;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
-html {
-    scroll-behavior: auto;
-    background: var(--gunmetal);
+html, body {
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
-    font-family: var(--type-primary);
-    background: var(--gunmetal);
-    color: var(--mercury);
-    min-height: 100vh;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    cursor: none; /* Custom cursor via tension field */
-}
-
-/* Escapement Anchor — Central fixed point */
-.escapement-anchor {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 12px;
-    height: 12px;
-    z-index: 100;
-    pointer-events: none;
-}
-
-.anchor-pivot {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: var(--escapement);
-    opacity: 0.8;
-    animation: pivotPulse var(--breath-duration) var(--breath-ease) infinite;
-}
-
-@keyframes pivotPulse {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.3); opacity: 0.4; }
-}
-
-/* Velocity Mark — Fixed signature */
-.velocity-mark {
-    position: fixed;
-    top: 3rem;
-    right: 3rem;
-    z-index: 90;
+    font-family: var(--font-clean);
+    background: var(--dial-black);
+    color: var(--white);
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: center;
+    -webkit-font-smoothing: antialiased;
 }
 
-.mark-text {
-    font-family: var(--type-primary);
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--escapement);
+/* Velocity Signature */
+.velocity-signature {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 100;
+}
+
+.velocity-mark {
+    font-family: var(--font-clean);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gold);
     letter-spacing: 0.1em;
 }
 
-.mark-line {
-    width: 30px;
+.velocity-line {
+    width: 20px;
     height: 1px;
-    background: var(--tarnished);
+    background: var(--silver);
 }
 
-.mark-label {
-    font-family: var(--type-primary);
+.velocity-text {
+    font-family: var(--font-clean);
     font-size: 0.6rem;
     font-weight: 300;
-    color: var(--tarnished);
+    color: var(--silver);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* Main Dial Container */
+.dial-container {
+    position: relative;
+    width: 100vmin;
+    height: 100vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dial Track (the ring) */
+.dial-track {
+    position: absolute;
+    width: calc(var(--dial-radius) * 2);
+    height: calc(var(--dial-radius) * 2);
+    pointer-events: none;
+}
+
+.track-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.track-circle {
+    stroke: var(--track);
+    opacity: 0.5;
+}
+
+.track-ticks {
+    stroke: var(--track);
+    opacity: 0.3;
+}
+
+/* Central Hub */
+.dial-hub {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.hub-center {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 20px rgba(201, 169, 97, 0.3);
+}
+
+.hub-brand {
+    font-family: var(--font-elegant);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+
+.hub-subtitle {
+    font-family: var(--font-clean);
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: var(--silver);
     letter-spacing: 0.2em;
     text-transform: uppercase;
 }
 
-/* Tension Field — Cursor tracking */
-.tension-field {
+/* Rotating Dial Ring */
+.dial-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: grab;
+}
+
+.dial-ring:active {
+    cursor: grabbing;
+}
+
+/* Dial Markers */
+.dial-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.dial-marker:hover .marker-dot {
+    transform: scale(1.3);
+    background: var(--gold);
+}
+
+.marker-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--silver);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.marker-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-clean);
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--silver);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.dial-marker:hover .marker-label,
+.dial-marker.active .marker-label {
+    opacity: 1;
+}
+
+/* Marker Content (expands at 12 o'clock) */
+.marker-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vmin;
+    max-width: 600px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.dial-marker.active .marker-content {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dial-marker.active .marker-dot {
+    transform: scale(1.5);
+    background: var(--gold);
+}
+
+.marker-content h2 {
+    font-family: var(--font-elegant);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.marker-content p {
+    font-family: var(--font-clean);
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    font-weight: 300;
+    color: var(--silver);
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.dial-link {
+    display: inline-block;
+    font-family: var(--font-elegant);
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    color: var(--gold);
+    text-decoration: none;
+    margin: 1rem 0;
+    transition: color 0.3s ease;
+}
+
+.dial-link:hover {
+    color: var(--white);
+}
+
+.dial-credit {
+    font-size: 0.7rem !important;
+    color: var(--silver) !important;
+    letter-spacing: 0.1em;
+}
+
+/* Navigation Hint */
+.nav-hint {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.nav-hint:hover {
+    opacity: 1;
+}
+
+.hint-text {
+    font-family: var(--font-clean);
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--silver);
+}
+
+.hint-text.secondary {
+    font-size: 0.55rem;
+    opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    :root {
+        --dial-radius: 40vmin;
+        --marker-distance: 35vmin;
+    }
+    
+    .velocity-signature {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .velocity-text {
+        display: none;
+    }
+    
+    .marker-content {
+        width: 70vmin;
+    }
+    
+    .marker-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    .marker-content p {
+        font-size: 0.85rem;
+    }
+}
     position: fixed;
     width: 20px;
     height: 20px;

@@ -3,119 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ballouard — The Chronometer's Breath</title>
-    <meta name="description" content="A Velocity Website. Only the present moment has a meaning.">
+    <title>Ballouard — The Timekeeper's Dial</title>
+    <meta name="description" content="A Velocity Website. Navigate like a watch. No scrolling.">
     
-    <!-- Typefaces: Space Grotesk (technical precision) + Crimson Pro (literary warmth) -->
+    <!-- Typefaces: Playfair Display (elegant serif) + Source Sans Pro (clean sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
-    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 </head>
 <body>
-    <!-- Escapement Mechanism - Central fixed point -->
-    <div class="escapement-anchor">
-        <div class="anchor-pivot"></div>
-        <div class="balance-wheel"></div>
-    </div>
-    
     <!-- Velocity Signature -->
-    <div class="velocity-mark">
-        <span class="mark-text">V</span>
-        <span class="mark-line"></span>
-        <span class="mark-label">Velocity Digital Atelier</span>
+    <div class="velocity-signature">
+        <span class="velocity-mark">V</span>
+        <span class="velocity-line"></span>
+        <span class="velocity-text">Velocity</span>
     </div>
-    
-    <!-- Tension Indicator (follows cursor subtly) -->
-    <div class="tension-field"></div>
 
-    <main class="chronometer">
-        <!-- Orbit 1: The Present (closest, sharpest) -->
-        <div class="orbit present-orbit" data-phase="0">
-            <div class="breathing-node">
-                <h1 class="chronometer-title">Ballouard</h1>
-                <p class="chronometer-subtitle">Only the present moment has a meaning</p>
-            </div>
+    <!-- Main Dial Interface -->
+    <main class="dial-container">
+        <!-- Central Hub -->
+        <div class="dial-hub">
+            <div class="hub-center"></div>
+            <div class="hub-brand">Ballouard</div>
+            <div class="hub-subtitle">Turn the dial</div>
         </div>
 
-        <!-- Orbit 2: The Philosophy (medium distance) -->
-        <div class="orbit philosophy-orbit" data-phase="72">
-            <div class="breathing-node philosophy-content">
-                <span class="orbit-label">Time</span>
-                <p class="orbit-text">
-                    We live in an exciting and exhilarating time. Today's technologies give us the feeling of being able to do more, faster, yet are we perhaps losing a small piece of what makes us human?
-                </p>
-                <p class="orbit-text secondary">
-                    With this in mind we propose taking a step to the side.
-                </p>
+        <!-- Rotating Dial Ring -->
+        <div class="dial-ring" id="dialRing">
+            <!-- Marker 1: Present (12 o'clock position initially) -->
+            <div class="dial-marker" data-index="0" data-angle="0">
+                <div class="marker-dot"></div>
+                <div class="marker-label">Present</div>
+                <div class="marker-content">
+                    <h2>Only the present moment has a meaning</h2>
+                    <p>Ballouard timepieces remind us that now is all that truly exists.</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Orbit 3: The Atelier -->
-        <div class="orbit atelier-orbit" data-phase="144">
-            <div class="breathing-node atelier-content">
-                <span class="orbit-label craft">The Atelier</span>
-                <p class="orbit-text craft-text">
-                    Ludovic Ballouard's unique and high quality timepieces deeply question our relationship with time, whilst never forgetting to add a touch of humor.
-                </p>
-                <div class="location-marker">
-                    <span class="marker-point">Avusy</span>
-                    <span class="marker-line"></span>
-                    <span class="marker-point">Switzerland</span>
+            <!-- Marker 2: Philosophy (2 o'clock) -->
+            <div class="dial-marker" data-index="1" data-angle="60">
+                <div class="marker-dot"></div>
+                <div class="marker-label">Philosophy</div>
+                <div class="marker-content">
+                    <h2>A Step to the Side</h2>
+                    <p>We live in an exciting time. Yet we propose taking a step to the side, to question our relationship with technology and rediscover what makes us human.</p>
+                </div>
+            </div>
+
+            <!-- Marker 3: Atelier (4 o'clock) -->
+            <div class="dial-marker" data-index="2" data-angle="120">
+                <div class="marker-dot"></div>
+                <div class="marker-label">Atelier</div>
+                <div class="marker-content">
+                    <h2>Avusy, Switzerland</h2>
+                    <p>Ludovic Ballouard's unique timepieces question our relationship with time, whilst never forgetting to add a touch of humor.</p>
+                </div>
+            </div>
+
+            <!-- Marker 4: Invention (6 o'clock) -->
+            <div class="dial-marker" data-index="3" data-angle="180">
+                <div class="marker-dot"></div>
+                <div class="marker-label">Invention</div>
+                <div class="marker-content">
+                    <h2>Upside Down</h2>
+                    <p>The past and future are literally presented upside down. No regrets. No qualms. Only the present is whole.</p>
+                </div>
+            </div>
+
+            <!-- Marker 5: Half Time (8 o'clock) -->
+            <div class="dial-marker" data-index="4" data-angle="240">
+                <div class="marker-dot"></div>
+                <div class="marker-label">½ Time</div>
+                <div class="marker-content">
+                    <h2>Half Time</h2>
+                    <p>Only the numeral at 12 o'clock is whole. All others are cut in half — perpetually reminding you that the present is what matters.</p>
+                </div>
+            </div>
+
+            <!-- Marker 6: Contact (10 o'clock) -->
+            <div class="dial-marker" data-index="5" data-angle="300">
+                <div class="marker-dot"></div>
+                <div class="marker-label">Contact</div>
+                <div class="marker-content">
+                    <h2>Connect</h2>
+                    <a href="mailto:info@ballouard.com" class="dial-link">info@ballouard.com</a>
+                    <p class="dial-credit">A Velocity Website © 2026</p>
                 </div>
             </div>
         </div>
 
-        <!-- Orbit 4: The Invention -->
-        <div class="orbit invention-orbit" data-phase="216">
-            <div class="breathing-node invention-content">
-                <span class="orbit-label invention">Upside Down</span>
-                <p class="orbit-text invention-text">
-                    The past time and the future time are, literally, presented upside down.
-                </p>
-                <p class="orbit-text invention-philosophy">
-                    No regrets about the past. No qualms for the future.
-                </p>
-            </div>
-        </div>
-
-        <!-- Orbit 5: Half Time -->
-        <div class="orbit halftime-orbit" data-phase="288">
-            <div class="breathing-node halftime-content">
-                <div class="fraction-display">
-                    <span class="numerator">1</span>
-                    <span class="fraction-line"></span>
-                    <span class="denominator">2</span>
-                </div>
-                <span class="orbit-label halftime-label">Half Time</span>
-                <p class="orbit-text halftime-explanation">
-                    The numeral that gives you the time is whole at 12 o'clock while the rest are cut in half. Perpetually reminding you that the most important time is the present.
-                </p>
-            </div>
-        </div>
-
-        <!-- Orbit 6: Contact (final position) -->
-        <div class="orbit contact-orbit" data-phase="360">
-            <div class="breathing-node contact-content">
-                <a href="mailto:info@ballouard.com" class="escapement-link" data-tension="high">
-                    info@ballouard.com
-                </a>
-                <div class="velocity-signature">
-                    <span class="signature-mark">A Velocity Website</span>
-                    <span class="signature-year">© 2026</span>
-                </div>
-            </div>
+        <!-- Dial Track (the ring path) -->
+        <div class="dial-track">
+            <svg viewBox="0 0 400 400" class="track-svg">
+                <circle class="track-circle" cx="200" cy="200" r="180" fill="none" stroke="currentColor" stroke-width="1"/>
+                <circle class="track-ticks" cx="200" cy="200" r="180" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="2 28"/>
+            </svg>
         </div>
     </main>
 
-    <!-- Scroll Progress (escapement wheel visualization) -->
-    <div class="escapement-progress">
-        <svg viewBox="0 0 100 100" class="progress-wheel">
-            <circle class="wheel-track" cx="50" cy="50" r="45"/>
-            <circle class="wheel-fill" cx="50" cy="50" r="45"/>
-        </svg>
+    <!-- Navigation Hint -->
+    <div class="nav-hint">
+        <span class="hint-text">Click & drag to rotate</span>
+        <span class="hint-text secondary">or click markers</span>
     </div>
 
     <script src="script.js"></script>
